@@ -37,7 +37,8 @@ typedef struct
     double latitude;
     double longitude;
     double altitude;
-} GPS_DATA;
+}
+GPS_DATA;
 
 
 #endif //doit etre la derniere ligne du fichier
