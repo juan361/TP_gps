@@ -126,7 +126,7 @@ int main(int argc, char** argv) {
             else{
                 r = NULL;
             }
-            return r;
+            return r; // on retourne r
         }
     }
 
