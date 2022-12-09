@@ -1,7 +1,7 @@
 #include "stdio.h"
 #include "GPS_TOOLS.h"
 #include "string.h"
-
+#include <stdbool.h>
 
 int main(int argc, char** argv) {
 
@@ -137,6 +137,35 @@ int main(int argc, char** argv) {
                 Exemple :
         la trame $GPGGA,064036.289,4836.5375,N,00740.9373,E,1,04,3.2,200.2,M,,,,0000*0E
         a un checksum égale à 15.*/
+  int checksum = 0;
+
+  // Booléen pour indiquer si nous sommes arrivés au '*' de délimitation de checksum
+  bool found_delimiter = false;
+
+  // Parcourir la trame caractère par caractère
+  while (*frame) {
+
+    if (found_delimiter) {
+      break;
+    }
+    // Si nous trouvons le '$', initialiser le checksum à 0 et continuer
+    if (*frame == '$') {
+      checksum = 0;
+    }
+    // Si nous trouvons le '*', indiquer que nous avons trouvé le délimiteur et continuer
+    else if (*frame == '*') {
+      found_delimiter = true;
+    }
+    // Si nous trouvons un autre caractère, mettre à jour le checksum en utilisant un XOR
+    else {
+      checksum ^= *frame;
+    }
+    frame++;
+  }
+
+  return checksum;
+}
+
 
     }
     return 0;
