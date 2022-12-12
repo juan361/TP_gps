@@ -12,12 +12,14 @@ int main(int argc, char** argv) {
     //trame NMEA GGA non valide: heure 06:40:36.289, lat= 48.608958°, long = 7.682288°, altitude = 300.2 m
     const char frame2[] = "$PPGGA,064036.289,4836.5375,N,00740.9373,E,1,04,3.2,300.2,M,,,,0000*0E\r\n";
 
+    // QUESTION 3
     const char *findChar(const char *str, const char c, int pos) {
         /*Cette fonction permet de rechercher la première occurrence du caractère « c » dans la chaîne de
         caractères « str » à partir du « pos»ième caractères . Si le caractère « c » est trouvé, la fonction
         retourne le pointeur vers le caractère dans la chaîne « str ». Sinon la fonction renvoie la valeur
         NULL.*/
         char test;
+        int i;
         for (int index = pos; i < strlen(str); index++) {
             test = str[index];
             if (test == c) {
@@ -26,7 +28,8 @@ int main(int argc, char** argv) {
         };
         return NULL;
     }
-
+    
+    // QUESTION 4
     const char *findStr(const char *str, const char *s, int pos) {
         //Le but de trouver la position de premiere lettre du mot puis analyser si il s'agit de celui-ci (avec le warning) sinon on augmente la position de +1 (pas possiblement autrement)
         const char *poslettre;
@@ -47,7 +50,7 @@ int main(int argc, char** argv) {
         return poslettre;
     }
 
-
+    // QUESTION 5
     int isValidHeader(const char *frame) {
         /*Cette fonction recherche dans la chaîne de caractère « frame » un entête valide de trame NMEA. Si un entête d’un trame GGA est trouvé, elle retourne la valeur XGGA_FRAME. Si l’entête trouvé est de type RMC, elle retourne la valeur XRMC_FRAME, … Si aucun entête valide est trouvé, elle retourne la valeur UNKNOWN_FRAME.*/
         if (findStr(frame, "GPA", 3) != NULL) {
@@ -58,6 +61,8 @@ int main(int argc, char** argv) {
             return (UNKNOWN_FRAME);
         }
     }
+    
+    // QUESTION 6
     int getFieldsCount(const char *frame) {
         /*Cette fonction compte le nombre de champs que contient la trame NMEA. Les champs d’une trame NMEA sont séparés par une « , » et sont compris entre le « $ » de début de trame et le « * » indiquant le check sum. L’entête de trame est donc le premier champ.*/
         int compt = 1, i;
@@ -73,6 +78,8 @@ int main(int argc, char** argv) {
         return (compt);
     }
 //printf("il y a %d field\n",getFieldsCount(frame0));
+    
+    // QUESTION 7
     char *gotoField(const char* frame, int n){
 
         /*Cette fonction renvoie le pointeur vers le premier caractère du « n »ieme champs de la trame contenu dans frame. Si le « n »ieme champ n’est pas trouvé, la fonction retour NULL.*/
@@ -93,6 +100,7 @@ int main(int argc, char** argv) {
         }
     }
 
+    // QUESTION 8
     char hexToChar(unsigned char value) {
         /* Cette fonction renvoie le caractère ASCII majuscule correspondant à la valeur hexadécimale de
   « value ». « value » doit avoir une valeur entre 0 et 15 sinon le résultat n’est pas garanti.
@@ -130,6 +138,7 @@ int main(int argc, char** argv) {
         }
     }
 
+    // QUESTION 9
     int computeCheckSum(const char *frame) {
         /*L'objectif de cette fonction est de calculer la valeur numérique du checksum de la trame. Le
         checksum d’un trame NMEA est égale à un XOR (opérateur ^ en C) entre tous les caractères de la
@@ -165,8 +174,55 @@ int main(int argc, char** argv) {
 
   return checksum;
 }
+    
+    // QUESTION 10
+    int isValidGpsData( const char *str_signal)
+	{
+		
+		//test si l'entete est correcte
+		int entete;
+		entete = isValidHeader(const char *str_signal);
+		return entete if entete == UNKNOWN_FRAME;
+		
+		
+		
+		// test la longeur maximale de 82 caractères
+		if (strlen ( str_signal) > 82){
+			return UNKNOWN_FRAME;
+			}
+		
+		
+		// test le nombre de champs 
+		int nb_champs;
+		nb_champs = getFieldsCount (const char *str_signal);
+		if ( nb_champs < 11 || nb_champs > 15){
+			return UNKNOWN_FRAME;
+		}
+		
+		// test la checksum
+		int sum_bin;
+		sum_bin = computeCheckSum(const char *str_signal);
+		
+		// lit la sum dans le message , les deux caractères suivant *
+		
+		char * ptr = findChar(const char *str_signal,'*',0);
+		return if ptr == NULL;		
+		
+		char sum_char[3];
+		sum_char[0] = *ptr;
+		sum_char[1] = *ptr+1
+		sum_char[2] = 0;// pour terminer la chaine de caracteres 
+		
+		if ( sum_char[0] != hexToChar(sum_bin/16) || sum_char[1] != hexToChar(sum_bin%16) ){
+			return UNKNOWN_FRAME;
+		}
+		
+	
+		return entete;
+	
+	}
+	
 
-
-    }
-    return 0;
-    }
+}
+return 0;
+}
