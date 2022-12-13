@@ -50,36 +50,36 @@ GPS_DATA;
         caractères « str » à partir du « pos»ième caractères . Si le caractère « c » est trouvé, la fonction
         retourne le pointeur vers le caractère dans la chaîne « str ». Sinon la fonction renvoie la valeur
         NULL.*/
-        char test;
-        int i;
-        for (int index = pos; i < strlen(str); index++) {
-            test = str[index];
-            if (test == c) {
-                return (&str[index]);
-            };
-        };
-        return NULL;
+        char test;							//Déclaration d'une variable du type charactère
+        int i;								//Déclaration d'une variable du type entier
+        for (int index = pos; i < strlen(str); index++) {		//Début d'une boucle 'pour' avec un index à remplir qu'on incrémente a chaque fois
+            test = str[index];						//Test récupère la valeur de str[index]
+            if (test == c) {						//Début d'une boucle 'si' ou l'on vérifi que test soit égale à C
+                return (&str[index]);					//Retour de l'adresse de la variable str[index]
+            };								//Fin de la boucle 'si'
+        };								//Fin de la boucle 'pour'
+        return NULL;							//Retour null
     }
     
     // QUESTION 4
     const char *findStr(const char *str, const char *s, int pos) {
         //Le but de trouver la position de premiere lettre du mot puis analyser si il s'agit de celui-ci (avec le warning) sinon on augmente la position de +1 (pas possiblement autrement)
-        const char *poslettre;
-        int warning = 1;
-        while (warning != 0) {
-            poslettre = findChar(str, s[0], pos);
-            warning = strlen(s);
-            if (poslettre == NULL) {
-                return NULL;
-            }
-            for (int index = 0; index < strlen(s); index++) {
-                if (*(poslettre + index) == s[index]) {
-                    warning--;
-                }
-            }
-            pos++;
-        }
-        return poslettre;
+        const char *poslettre;						//Déclaration d'un pointeur poslettre
+        int warning = 1;						//Déclaration d'un entier égal à 1
+        while (warning != 0) {						//Début d'une boucle 'tant que' warning est pas égal à 0 on fait notre boucle
+            poslettre = findChar(str, s[0], pos);			//poslettre pointe l'adresse de findChar
+            warning = strlen(s);					//warning prend la valeur de strlen(s)
+            if (poslettre == NULL) {					//Début d'une boucle 'si' qui vérifie si poslettre est égal à null
+                return NULL;						//On retourne null
+            }								//Fin de la boucle 'si'
+            for (int index = 0; index < strlen(s); index++) {		//Début d'une boucle 'pour' dans la qu'elle on déclare un entier index qui est égal à zéro qu'on incrémente à chaque fois qu'on 									utilise la boucle
+                if (*(poslettre + index) == s[index]) {			//Début de la boucle 'si' dans la qu'elle on additionne poslettre et index qu'on compare avec s[index]
+                    warning--;						
+                }							//Fin de la boucle 'si'
+            }								//Fin de la boucle 'pour'
+            pos++;							//On incrémente pos
+        }								//Fin de la boucle 'tant que'
+        return poslettre;						//Retour poslettre
     }
 
     // QUESTION 5
