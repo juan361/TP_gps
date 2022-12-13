@@ -1,7 +1,8 @@
 #include "stdio.h"
 #include "GPS_TOOLS.h"
-#include "string.h"
+#include <string.h>
 #include <stdbool.h>
+
 
 int main(int argc, char** argv) {
 
@@ -221,6 +222,103 @@ int main(int argc, char** argv) {
 		return entete;
 	
 	}
+	// QUESTION 11 (pas fini)
+		char *getField( char *str) {
+		char field[64];
+		int ii=0;
+		while ( *(str+ii) != ','){
+			field[ii]= *(str+ii);	
+			++ii;
+		}
+		*(str+ii)=0;
+		
+		return field;
+	}
+	
+	
+	
+	int  extractGpsData(const char *frame , gps_data *data)
+	{
+		char buffer[64];
+		char nombre_char[64];
+		
+		int entete = isValidGpsData( const char *frame);
+		return entete if entete == UNKNOWN_FRAME;
+		
+		data.frame = frame;
+		data.is_valid = entete;
+	// récupération de l'heure dans buffer;
+		strcpy( buffer, getField( gotoField( frame , 2) ));
+		data.year = 0;
+		data.month = 0;
+		data.day = 0;
+		//traitement des heures
+		nombre_char[0] = buffer[0];
+		nombre_char[1] = buffer[1];
+		nombre_char[2] = 0;
+		data.hours =  atoi(nombre_char);
+		nombre_char[0] = buffer[2];
+		nombre_char[1] = buffer[3];
+		nombre_char[2] = 0;
+		data.minutes =  atoi(nombre_char);
+		data.secondes =  atof(buffer[4]);
+		
+	// récupération de la latitude  dans buffer;
+		strcpy( buffer, getField( gotoField( frame , 3) ));
+	// degres/minute => minute on divise par 60
+	// récupération de la direction Si N alors *(1) Si S alors *(-1)
+		strcpy( buffer, getField( gotoField( frame , 4) ));		
+				
+		
+		return entete;
+	}
+
+	// récupération de la longitude  dans buffer;
+		strcpy( buffer, getField( gotoField( frame , 5) ));
+	// degres/minute => minute on divise par 60
+	// récupération de la direction Si E alors *(1) Si O alors *(-1)	
+		strcpy( buffer, getField( gotoField( frame , 6) ));
+			
+			
+		
+		return entete;
+	}
+	
+	// récupération de l'altitude dans buffer;
+		strcpy( buffer, getField( gotoField( frame , 10) ));
+			
+			
+		
+		return entete;
+	}
+
+	// QUESTION 12 (pas fini)
+		void printGpsData( const gps_data *data){
+		
+		char  gps_frame_type[64];
+		
+		printf("\n----------------------\naffichage de la Frame sélectionnée\n----------------------\n");
+		switch( data.is_valid ){
+		case '1' :
+			strcpy(gps_frame_type, "XRMC_FRAME");
+			break;
+		case '2' :
+			strcpy(gps_frame_type, "XGGA_FRAME");
+			break;
+		case '3' :
+			strcpy(gps_frame_type, "XGLL_FRAME");
+			break;
+		case '4' :
+			strcpy(gps_frame_type, "XGNS_FRAME");
+			break;
+ 	
+		}
+		
+		printf( "Frame de type %s  datée  ( H/M/S ) %02d%02d%02.5f \n", gps_frame_type,data.hours,data.minutes,data.secondes);
+		
+		
+	}
+	
 	
 
 }
