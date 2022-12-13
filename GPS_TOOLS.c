@@ -4,6 +4,7 @@
 
 
 void PrintGpsData(const gps_data *data) {
+    //réalisé par Amara Ranya et El Belkasmi Meriem
     printf("################### AFFICHAGE DE L'ENSEMBLE DES INFOS CONTENUS DANS LA STRUCTURE DATA");
     printf("frame : %s", data->frame);
     printf("type de frame : %d", data->frame_type); //permet l'affichage du type de "FRAME"

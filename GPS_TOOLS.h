@@ -42,7 +42,7 @@ typedef struct {
         GPS_DATA;
 
 
-// QUESTION 3
+// QUESTION 3 Juan
 const char *findChar(const char *str, const char c, int pos) {
     /*Cette fonction permet de rechercher la première occurrence du caractère « c » dans la chaîne de
     caractères « str » à partir du « pos»ième caractères . Si le caractère « c » est trouvé, la fonction
@@ -60,7 +60,7 @@ const char *findChar(const char *str, const char c, int pos) {
     return NULL;                            //Retour null
 }
 
-// QUESTION 4
+// QUESTION 4 juan
 const char *findStr(const char *str, const char *s, int pos) {
     //Le but de trouver la position de premiere lettre du mot puis analyser si il s'agit de celui-ci (avec le warning) sinon on augmente la position de +1 (pas possiblement autrement)
     const char *poslettre;                        //Déclaration d'un pointeur poslettre
@@ -84,7 +84,7 @@ const char *findStr(const char *str, const char *s, int pos) {
     return poslettre;                        //Retour poslettre
 }
 
-// QUESTION 5
+// QUESTION 5 Thomas
 int isValidHeader(const char *frame) {
     /*Cette fonction recherche dans la chaîne de caractère « frame » un entête valide de trame NMEA. Si un entête d’un trame GGA est trouvé, elle retourne la valeur XGGA_FRAME. Si l’entête trouvé est de type RMC, elle retourne la valeur XRMC_FRAME, … Si aucun entête valide est trouvé, elle retourne la valeur UNKNOWN_FRAME.*/
     if (findStr(frame, "GPA", 3) != NULL) {
@@ -96,7 +96,7 @@ int isValidHeader(const char *frame) {
     }
 }
 
-// QUESTION 6
+// QUESTION 6 Thomas
 int getFieldsCount(const char *frame) {
     /*Cette fonction compte le nombre de champs que contient la trame NMEA. Les champs d’une trame NMEA sont séparés par une « , » et sont compris entre le « $ » de début de trame et le « * » indiquant le check sum. L’entête de trame est donc le premier champ.*/
     int compt = 1, i;
@@ -112,7 +112,7 @@ int getFieldsCount(const char *frame) {
     return (compt);
 }
 
-// QUESTION 7
+// QUESTION 7 Thomas et Juan
 char *gotoField(const char *frame, int n) {
 
     /*Cette fonction renvoie le pointeur vers le premier caractère du « n »ieme champs de la trame contenu dans frame. Si le « n »ieme champ n’est pas trouvé, la fonction retour NULL.*/
@@ -133,7 +133,7 @@ char *gotoField(const char *frame, int n) {
     }
 }
 
-// QUESTION 8
+// QUESTION 8 Juan
 char hexToChar(unsigned char value) {
     /* Cette fonction renvoie le caractère ASCII majuscule correspondant à la valeur hexadécimale de
 « value ». « value » doit avoir une valeur entre 0 et 15 sinon le résultat n’est pas garanti.
@@ -171,7 +171,7 @@ pour value =12 la fonction retourne ‘C’*/
     }
 }
 
-// QUESTION 9
+// QUESTION 9 Théo
 int computeCheckSum(const char *frame) {
     /*L'objectif de cette fonction est de calculer la valeur numérique du checksum de la trame. Le
     checksum d’un trame NMEA est égale à un XOR (opérateur ^ en C) entre tous les caractères de la
@@ -208,7 +208,7 @@ int computeCheckSum(const char *frame) {
     return checksum;
 }
 
-// QUESTION 10
+// QUESTION 10 Théo
 int isValidGpsData(const char *str_signal) {
 
     //test si l'entete est correcte
@@ -261,7 +261,7 @@ int isValidGpsData(const char *str_signal) {
 
 }
 
-// QUESTION 11 (pas fini)
+// QUESTION 11 (pas fini) Théo
 char *getField(char *str) {
     char field[64];
     int ii = 0;
