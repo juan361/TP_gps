@@ -43,14 +43,6 @@ typedef struct
 }
 GPS_DATA;
 
-int main(int argc, char** argv) {
-
-    //trame NMEA GGA valide: heure 06:40:36.289, lat= 48.608958°, long = 7.682288°, altitude = 200.2 m
-    const char frame0[] = "$GPGGA,064036.289,4836.5375,N,00740.9373,E,1,04,3.2,200.2,M,,,,0000*0E\r\n";
-    //trame NMEA RMC valide: heure 05:37:40.00, lat= 25.060532°, long = 121.600165°, vitesse = 2.69 knot
-    const char frame1[] = "$GPRMC,053740.000,A,2503.6319,N,12136.0099,E,2.69,79.65,100106,,,A*53\r\n";
-    //trame NMEA GGA non valide: heure 06:40:36.289, lat= 48.608958°, long = 7.682288°, altitude = 300.2 m
-    const char frame2[] = "$PPGGA,064036.289,4836.5375,N,00740.9373,E,1,04,3.2,300.2,M,,,,0000*0E\r\n";
 
     // QUESTION 3
     const char *findChar(const char *str, const char c, int pos) {
@@ -334,38 +326,6 @@ int main(int argc, char** argv) {
 		return entete;
 	}
 
-	// QUESTION 12 (pas fini)
-		void printGpsData( const gps_data *data){
-		
-		char  gps_frame_type[64];
-		
-		printf("\n----------------------\naffichage de la Frame sélectionnée\n----------------------\n");
-		switch( data.is_valid ){
-		case '1' :
-			strcpy(gps_frame_type, "XRMC_FRAME");
-			break;
-		case '2' :
-			strcpy(gps_frame_type, "XGGA_FRAME");
-			break;
-		case '3' :
-			strcpy(gps_frame_type, "XGLL_FRAME");
-			break;
-		case '4' :
-			strcpy(gps_frame_type, "XGNS_FRAME");
-			break;
- 	
-		}
-		
-		printf( "Frame de type %s  datée  ( H/M/S ) %02d%02d%02.5f \n", gps_frame_type,data.hours,data.minutes,data.secondes);
-		
-		
-	}
-	
-	
-
-}
-return 0;
-}
 
 
 #endif //doit etre la derniere ligne du fichier
