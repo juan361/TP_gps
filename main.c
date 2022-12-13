@@ -64,21 +64,24 @@ int main(int argc, char** argv) {
     }
     
     // QUESTION 6
-    int getFieldsCount(const char *frame) {
+    int getFieldsCount(const char *frame){
         /*Cette fonction compte le nombre de champs que contient la trame NMEA. Les champs d’une trame NMEA sont séparés par une « , » et sont compris entre le « $ » de début de trame et le « * » indiquant le check sum. L’entête de trame est donc le premier champ.*/
-        int compt = 1, i;
-        char pos = 1;
-        while (findChar(frame, '*', pos) != NULL) {
-            if (findChar(frame, ',', pos) != NULL) {
+        int compt=1,i;
+        char pos=1;
+        while (findChar(frame,'*',pos)!=NULL)
+        {
+            if (findChar(frame,',',pos)!=NULL)
+            {
                 compt++;
-                pos = findChar(frame, ',', pos) - &frame[0] + 2;
-            } else {
+                pos=findChar(frame,',',pos)-&frame[0]+2;
+            }
+            else
+            {
                 break;
             }
         }
-        return (compt);
+        return(compt);
     }
-//printf("il y a %d field\n",getFieldsCount(frame0));
     
     // QUESTION 7
     char *gotoField(const char* frame, int n){
